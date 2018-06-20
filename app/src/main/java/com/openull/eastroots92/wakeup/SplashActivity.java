@@ -1,7 +1,6 @@
 package com.openull.eastroots92.wakeup;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -32,8 +31,7 @@ public class SplashActivity extends AppCompatActivity {
         Runnable startActivityRunnable = new Runnable() {
             @Override
             public void run() {
-                Boolean isCurrent = checkingUserData();
-                changeActivityManager(isCurrent);
+                startMainActivity();
             }
         };
 
@@ -43,33 +41,9 @@ public class SplashActivity extends AppCompatActivity {
         );
     }
 
-    private Boolean checkingUserData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName","");
-
-        if (userName != ""){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    private void changeActivityManager(boolean isCurrent) {
-        if(isCurrent) {
-            startIntroActivity();
-        }else {
-            startMainActivity();
-        }
-    }
-
-    private void startIntroActivity() {
-        startActivity(new Intent(this, IntroActivity.class));
-
-        finish();
-    }
-
     private void startMainActivity() {
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
 
         finish();
     }
