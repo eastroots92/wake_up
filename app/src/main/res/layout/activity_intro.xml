@@ -20,7 +20,7 @@
                     android:id="@+id/imageView_intro1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/intro_1"
+                    android:src="@drawable/cartoon_1"
                     android:adjustViewBounds="true"
                     />
 
@@ -43,7 +43,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/intro_2"
+                    android:src="@drawable/cartoon_2"
                     android:adjustViewBounds="true"
                     />
                 
