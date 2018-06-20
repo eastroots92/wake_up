@@ -4,6 +4,7 @@
 
     <dimen name="text_title_mid">24sp</dimen>
     <dimen name="text_title_small">20sp</dimen>
+    <dimen name="text_time">60sp</dimen>
 
     <dimen name="margin_mid">8dp</dimen>
     <dimen name="margin_small">4dp</dimen>
