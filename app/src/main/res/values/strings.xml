@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">일어나</string>
+
+    <string name="introButton">시작하기</string>
+    <string name="intro1">아침에 못 일어나니?\n애잔하네....\n내가 깨워줄게\n이름이 뭐야?</string>
+    <string name="intro2_1">내 이름은</string>
+    <string name="intro2_2">이야!!</string>
 </resources>
