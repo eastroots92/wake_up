@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView_alarmButton"
+            android:id="@+id/textView_alarmOnButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/small_height"
             android:gravity="center"

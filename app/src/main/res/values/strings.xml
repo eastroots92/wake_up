@@ -8,4 +8,7 @@
 
     <string name="mainButton">깨워달라 부탁하기</string>
     <string name="main_ready">몇 시에 일어날래?</string>
+
+    <string name="alarmButton">일어났어!</string>
+    <string name="wakeUp">아 일어나!</string>
 </resources>

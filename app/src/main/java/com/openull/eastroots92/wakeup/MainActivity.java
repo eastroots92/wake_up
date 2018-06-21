@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void alarmButton() {
-        binding.textViewAlarmButton.setOnClickListener(__->{
+        binding.textViewAlarmOnButton.setOnClickListener(__->{
             int[] currentTime = getTimeNow();
             showTimePicker(currentTime);
         });
