@@ -1,5 +1,6 @@
 package com.openull.eastroots92.wakeup.UI;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,8 +8,10 @@ import android.databinding.DataBindingUtil;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.openull.eastroots92.wakeup.R;
 import com.openull.eastroots92.wakeup.Receiver.NotificationReceiver;
@@ -16,6 +19,8 @@ import com.openull.eastroots92.wakeup.databinding.ActivityAlarmBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static com.openull.eastroots92.wakeup.Receiver.NotificationReceiver.CHANNEL_ID;
 
 public class AlarmActivity extends AppCompatActivity {
 
@@ -35,10 +40,22 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     private void init() {
+        initNotiAction();
         initPreference();
         initView();
         initAlarm();
         ButtonClickListener();
+    }
+
+    private void initNotiAction() {
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.cancel(CHANNEL_ID);
+
+        PowerManager pm=(PowerManager)getSystemService(POWER_SERVICE);
+        if(!pm.isScreenOn()){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+        }
     }
 
     private void ButtonClickListener() {

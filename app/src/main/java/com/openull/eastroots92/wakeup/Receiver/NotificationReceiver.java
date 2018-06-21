@@ -24,7 +24,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     private Intent touchActionIntent;
     private PendingIntent touchActionPendingIntent;
 
-    private static final int CHANNEL_ID = 92;
+    public static final int CHANNEL_ID = 92;
     private static final int REQUEST_CODE_1 = 10;
 
     @Override

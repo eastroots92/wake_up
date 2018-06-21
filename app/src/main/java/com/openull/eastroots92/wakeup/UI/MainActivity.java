@@ -31,9 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private Intent notificationIntent;
     private PendingIntent notificationPendingIntent;
 
+    private Intent alarmActivityIntent;
+    private PendingIntent alarmActivityPendingIntent;
+
     private Boolean isDatePicked;
 
     private static final int REQUEST_CODE_2 = 10;
+    private static final int REQUEST_CODE_3 = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initIntent() {
         initNotificationReceiver();
+        initAlarmActivity();
+    }
+
+    private void initAlarmActivity() {
+        alarmActivityIntent = new Intent("com.openull.eastroots92.ACTION_ALARM");
+        alarmActivityPendingIntent = PendingIntent.getActivity(MainActivity.this, REQUEST_CODE_3, alarmActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private void initNotificationReceiver() {
@@ -170,11 +180,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAlarm() {
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis() - 120000, notificationPendingIntent);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), alarmActivityPendingIntent);
     }
 
     private void cancelAlarm(){
         alarmManager.cancel(notificationPendingIntent);
         notificationPendingIntent.cancel();
+
+        alarmManager.cancel(alarmActivityPendingIntent);
+        alarmActivityPendingIntent.cancel();
     }
 
 }
