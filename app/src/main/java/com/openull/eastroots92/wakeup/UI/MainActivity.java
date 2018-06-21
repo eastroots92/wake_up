@@ -179,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAlarm() {
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis() - 120000, notificationPendingIntent);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), alarmActivityPendingIntent);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis() - 60000, notificationPendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmActivityPendingIntent);
     }
 
     private void cancelAlarm(){
