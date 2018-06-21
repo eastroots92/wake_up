@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private Intent notificationIntent;
     private PendingIntent notificationPendingIntent;
 
+    private Boolean isDatePicked;
+
     private static final int REQUEST_CODE_2 = 10;
 
     @Override
@@ -96,9 +98,21 @@ public class MainActivity extends AppCompatActivity {
             editor.commit();
 
             if(isChecked){
-                Toast.makeText(this, "z켜켴", Toast.LENGTH_SHORT).show();
+                if(!isDatePicked){
+                    int hour = timePreference.getInt("hour", -1);
+                    int minute = timePreference.getInt("minute", -1);
+
+                    if( hour > -1 && minute > -1 ) {
+                        calendar = Calendar.getInstance();
+                        calendar.set(Calendar.HOUR_OF_DAY, hour);
+                        calendar.set(Calendar.MINUTE, minute);
+
+                        setAlarm();
+                    }
+                }
+
             }else{
-                Toast.makeText(this, "꺼꺾", Toast.LENGTH_SHORT).show();
+                cancelAlarm();
             }
         });
     }
@@ -112,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void showTimePicker(int[] currentTime) {
         final TimePickerDialog timeDialog = new TimePickerDialog(this, (view, hourOfDay, minute) ->{
+
+            isDatePicked = true;
 
             // TimePickerDialog로 입력 받은 시간 값을 설정함
             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
@@ -130,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
             binding.switchTime.setChecked(true);
 
             setAlarm();
+
+            isDatePicked = false;
 
         }, currentTime[0],currentTime[1], false);
 
@@ -152,6 +170,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAlarm() {
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis() - 120000, notificationPendingIntent);
+    }
+
+    private void cancelAlarm(){
+        alarmManager.cancel(notificationPendingIntent);
+        notificationPendingIntent.cancel();
     }
 
 }
