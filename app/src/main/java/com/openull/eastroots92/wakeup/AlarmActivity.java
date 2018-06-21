@@ -3,6 +3,9 @@ package com.openull.eastroots92.wakeup;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -14,6 +17,7 @@ import java.util.Calendar;
 public class AlarmActivity extends AppCompatActivity {
 
     private ActivityAlarmBinding binding;
+    private MediaPlayer alarmBell;
 
     private SharedPreferences timePreference;
     private SharedPreferences userPreference;
@@ -30,6 +34,27 @@ public class AlarmActivity extends AppCompatActivity {
     private void init() {
         initPreference();
         initView();
+        initAlarm();
+        ButtonClickListener();
+    }
+
+    private void ButtonClickListener() {
+        alarmButton();
+    }
+
+    private void alarmButton() {
+        binding.textViewAlarmOffButton.setOnClickListener(__->{
+            alarmBell.stop();
+        });
+    }
+
+    private void initAlarm() {
+        Uri alarm = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        alarmBell = MediaPlayer.create(getApplicationContext(), alarm);
+
+        alarmBell.start();
+        alarmBell.setLooping(true);
+        alarmBell.setVolume(1,1);
     }
 
     private void initView() {
