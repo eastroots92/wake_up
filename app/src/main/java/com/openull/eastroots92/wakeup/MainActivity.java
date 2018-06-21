@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.openull.eastroots92.wakeup.databinding.ActivityMainBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -71,6 +72,19 @@ public class MainActivity extends AppCompatActivity {
     private void showTimePicker(int[] currentTime) {
         final TimePickerDialog timeDialog = new TimePickerDialog(this, (view, hourOfDay, minute) ->{
 
+            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendar.set(Calendar.MINUTE,minute);
+
+            SharedPreferences.Editor editor = timePreference.edit();
+            editor.putInt("hour", hourOfDay);
+            editor.putInt("minute",minute);
+            editor.putBoolean("isMorningCall", true);
+            editor.commit();
+
+            SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm");
+            binding.textViewTime.setText(simpleDate.format(calendar.getTime()));
+            binding.switchTime.setChecked(true);
+
         }, currentTime[0],currentTime[1], false);
 
         timeDialog.show();
@@ -78,12 +92,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initDate() {
-        calendar = Calendar.getInstance();
         timePreference = getSharedPreferences("dateTime", MODE_PRIVATE);
     }
 
 
     public int[] getTimeNow() {
+        calendar = Calendar.getInstance();
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         int currentMinute = calendar.get(Calendar.MINUTE);
         int[] currentTime = {currentHour,currentMinute};
