@@ -1,10 +1,12 @@
 package com.openull.eastroots92.wakeup;
 
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.openull.eastroots92.wakeup.databinding.ActivityMainBinding;
 
@@ -14,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private Calendar calendar;
+
+    private SharedPreferences timePreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +29,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         initDate();
+        initTimeSwitch();
         ButtonClickListener();
+    }
+
+    private void initTimeSwitch() {
+        boolean isMorningCall = timePreference.getBoolean("isMorningCall", false);
+
+        if(isMorningCall){
+            binding.switchTime.setChecked(true);
+        }
     }
 
     private void ButtonClickListener() {
         alarmButton();
+        timeSwitch();
+    }
+
+    private void timeSwitch() {
+        binding.switchTime.setOnCheckedChangeListener( (buttonView, isChecked) -> {
+
+            SharedPreferences.Editor editor = timePreference.edit();
+            editor.putBoolean("isMorningCall",isChecked);
+            editor.commit();
+
+            if(isChecked){
+                Toast.makeText(this, "z켜켴", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "꺼꺾", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void alarmButton() {
@@ -50,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initDate() {
         calendar = Calendar.getInstance();
+        timePreference = getSharedPreferences("dateTime", MODE_PRIVATE);
     }
 
 
@@ -59,4 +89,5 @@ public class MainActivity extends AppCompatActivity {
         int[] currentTime = {currentHour,currentMinute};
         return currentTime;
     }
+
 }
