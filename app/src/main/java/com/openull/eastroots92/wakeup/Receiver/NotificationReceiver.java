@@ -45,7 +45,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     private void initIntent() {
         touchActionIntent = new Intent(context, MainActivity.class);
-        touchActionPendingIntent = PendingIntent.getActivity(context,REQUEST_CODE_1,intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        touchActionPendingIntent = PendingIntent.getActivity(context,REQUEST_CODE_1,touchActionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
     }
 
