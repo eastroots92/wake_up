@@ -1,6 +1,7 @@
 package com.openull.eastroots92.wakeup.UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.media.MediaPlayer;
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.openull.eastroots92.wakeup.R;
+import com.openull.eastroots92.wakeup.Receiver.NotificationReceiver;
 import com.openull.eastroots92.wakeup.databinding.ActivityAlarmBinding;
 
 import java.text.SimpleDateFormat;
@@ -46,8 +48,15 @@ public class AlarmActivity extends AppCompatActivity {
     private void alarmButton() {
         binding.textViewAlarmOffButton.setOnClickListener(__->{
             alarmBell.stop();
+            testCode();
         });
     }
+
+    private void testCode() {
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        sendBroadcast(intent);
+    }
+
 
     private void initAlarm() {
         Uri alarm = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
