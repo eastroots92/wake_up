@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Calendar calendar;
 
     private SharedPreferences timePreference;
+    private SimpleDateFormat simpleDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         initDate();
+        initView();
         initTimeSwitch();
         ButtonClickListener();
+    }
+
+    private void initView() {
+        int hour = timePreference.getInt("hour", -1);
+        int minute = timePreference.getInt("minute", -1);
+
+        if( hour > -1 && minute > -1 ){
+            calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, minute);
+            binding.textViewTime.setText(simpleDate.format(calendar.getTime()));
+        }
     }
 
     private void initTimeSwitch() {
@@ -72,16 +86,19 @@ public class MainActivity extends AppCompatActivity {
     private void showTimePicker(int[] currentTime) {
         final TimePickerDialog timeDialog = new TimePickerDialog(this, (view, hourOfDay, minute) ->{
 
+            // TimePickerDialog로 입력 받은 시간 값을 설정함
             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
             calendar.set(Calendar.MINUTE,minute);
 
+            // sharedpreferences에 값 추가
             SharedPreferences.Editor editor = timePreference.edit();
             editor.putInt("hour", hourOfDay);
             editor.putInt("minute",minute);
             editor.putBoolean("isMorningCall", true);
             editor.commit();
 
-            SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm");
+
+            // View에 보여질 내용들 설정 (여기서 SimpleDateFormat을 이용해서 값 변경)
             binding.textViewTime.setText(simpleDate.format(calendar.getTime()));
             binding.switchTime.setChecked(true);
 
@@ -93,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initDate() {
         timePreference = getSharedPreferences("dateTime", MODE_PRIVATE);
+        simpleDate = new SimpleDateFormat("HH:mm");
     }
 
 
