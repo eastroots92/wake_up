@@ -104,8 +104,9 @@ public class IntroActivity extends AppCompatActivity {
     public void setUserData(String userName) {
         SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
 
-        sharedPreferences.edit().putString("name",userName);
-        sharedPreferences.edit().commit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name",userName);
+        editor.commit();
     }
 
     private void startMainActivity() {

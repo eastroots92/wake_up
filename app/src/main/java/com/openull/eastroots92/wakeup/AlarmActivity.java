@@ -61,7 +61,7 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     private void initPreference() {
-        timePreference = getSharedPreferences("userData", Context.MODE_PRIVATE);
-        userPreference = getSharedPreferences("dateTime", Context.MODE_PRIVATE);
+        timePreference = getSharedPreferences("dateTime", Context.MODE_PRIVATE);
+        userPreference = getSharedPreferences("userData", Context.MODE_PRIVATE);
     }
 }

@@ -45,9 +45,9 @@ public class SplashActivity extends AppCompatActivity {
 
     private Boolean checkingUserData() {
         SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
-        String userName = sharedPreferences.getString("userName","");
+        String userName = sharedPreferences.getString("name","");
 
-        if (userName != ""){
+        if (userName == ""){
             return true;
         }else{
             return false;
@@ -57,6 +57,7 @@ public class SplashActivity extends AppCompatActivity {
     private void changeActivityManager(boolean isCurrent) {
         if(isCurrent) {
             startIntroActivity();
+
         }else {
             startMainActivity();
         }
@@ -64,13 +65,11 @@ public class SplashActivity extends AppCompatActivity {
 
     private void startIntroActivity() {
         startActivity(new Intent(this, IntroActivity.class));
-
         finish();
     }
 
     private void startMainActivity() {
-        startActivity(new Intent(this, MainActivity.class));
-
+        startActivity(new Intent(this, AlarmActivity.class));
         finish();
     }
 }
