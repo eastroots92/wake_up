@@ -1,4 +1,4 @@
-package com.openull.eastroots92.wakeup;
+package com.openull.eastroots92.wakeup.UI;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.openull.eastroots92.wakeup.R;
 import com.openull.eastroots92.wakeup.databinding.ActivityIntroBinding;
 
 public class IntroActivity extends AppCompatActivity {

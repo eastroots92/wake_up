@@ -1,4 +1,4 @@
-package com.openull.eastroots92.wakeup;
+package com.openull.eastroots92.wakeup.UI;
 
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.openull.eastroots92.wakeup.R;
 import com.openull.eastroots92.wakeup.databinding.ActivityMainBinding;
 
 import java.text.SimpleDateFormat;

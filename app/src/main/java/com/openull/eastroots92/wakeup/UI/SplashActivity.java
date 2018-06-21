@@ -1,4 +1,4 @@
-package com.openull.eastroots92.wakeup;
+package com.openull.eastroots92.wakeup.UI;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +7,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.openull.eastroots92.wakeup.R;
+import com.openull.eastroots92.wakeup.UI.AlarmActivity;
+import com.openull.eastroots92.wakeup.UI.IntroActivity;
 import com.openull.eastroots92.wakeup.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {
