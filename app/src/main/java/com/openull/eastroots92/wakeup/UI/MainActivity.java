@@ -1,6 +1,9 @@
 package com.openull.eastroots92.wakeup.UI;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.openull.eastroots92.wakeup.R;
+import com.openull.eastroots92.wakeup.Receiver.NotificationReceiver;
 import com.openull.eastroots92.wakeup.databinding.ActivityMainBinding;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences timePreference;
     private SimpleDateFormat simpleDate;
 
+    private AlarmManager alarmManager;
+
+    private Intent notificationIntent;
+    private PendingIntent notificationPendingIntent;
+
+    private static final int REQUEST_CODE_2 = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +42,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
         initDate();
         initView();
+        initIntent();
         initTimeSwitch();
         ButtonClickListener();
     }
+
 
     private void initView() {
         int hour = timePreference.getInt("hour", -1);
@@ -48,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
             binding.textViewTime.setText(simpleDate.format(calendar.getTime()));
         }
     }
+
+    private void initIntent() {
+        initNotificationReceiver();
+    }
+
+    private void initNotificationReceiver() {
+        notificationIntent = new Intent(MainActivity.this, NotificationReceiver.class);
+        notificationPendingIntent = PendingIntent.getBroadcast(MainActivity.this, REQUEST_CODE_2, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
 
     private void initTimeSwitch() {
         boolean isMorningCall = timePreference.getBoolean("isMorningCall", false);
@@ -103,11 +129,12 @@ public class MainActivity extends AppCompatActivity {
             binding.textViewTime.setText(simpleDate.format(calendar.getTime()));
             binding.switchTime.setChecked(true);
 
+            setAlarm();
+
         }, currentTime[0],currentTime[1], false);
 
         timeDialog.show();
     }
-
 
     private void initDate() {
         timePreference = getSharedPreferences("dateTime", MODE_PRIVATE);
@@ -121,6 +148,10 @@ public class MainActivity extends AppCompatActivity {
         int currentMinute = calendar.get(Calendar.MINUTE);
         int[] currentTime = {currentHour,currentMinute};
         return currentTime;
+    }
+
+    private void setAlarm() {
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis() - 120000, notificationPendingIntent);
     }
 
 }
