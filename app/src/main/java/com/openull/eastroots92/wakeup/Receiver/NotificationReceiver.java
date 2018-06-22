@@ -44,43 +44,18 @@ public class NotificationReceiver extends BroadcastReceiver {
     }
 
     private void initIntent() {
-        touchActionIntent = new Intent(context, MainActivity.class);
-        touchActionPendingIntent = PendingIntent.getActivity(context,REQUEST_CODE_1,touchActionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//      TODO: Noti 클릭 시 메인 액티비티 띄우기!
 
     }
 
     private void initBuilder() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            String channelId = "noti";
-            String channelName = "MorningCall";
-            String channelDescription = "이거 끄면 모닝콜 아무소용 없어요";
+//      TODO: NotificationCompat.Builder 만들기!
+// 오레오부터 변경사항 있음 채널 넣어줘야 함!
 
-            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(channelDescription);
-
-            // 선택사항
-            channel.enableLights(true);
-            channel.enableVibration(true);
-
-            // 어짜피 필요한데 오레오부터는 channel이 무조건 필요함
-            notificationManager.createNotificationChannel(channel);
-
-            builder = new NotificationCompat.Builder(context, channelId);
-        }else{
-            builder = new NotificationCompat.Builder(context);
-        }
     }
 
     private void setBuilder() {
-        builder.setSmallIcon(R.drawable.icon_alarm)
-                .setWhen(System.currentTimeMillis())
-                .setContentTitle("잠시후에 알람이 울립니다.")
-                .setContentText("두구두구두구두구두구두구")
-                .setAutoCancel(true)
-                .setOngoing(false)
-                .setContentIntent(touchActionPendingIntent);
-
-        notificationManager.notify(CHANNEL_ID, builder.build());
+//      TODO: builder 에 Noti 속성 마구마구 넣고 notify 실행!
     }
 
 

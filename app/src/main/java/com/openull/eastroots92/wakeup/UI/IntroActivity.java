@@ -103,11 +103,7 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     public void setUserData(String userName) {
-        SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name",userName);
-        editor.commit();
+        // TODO: SharedPreference 저장 공간 새로 만들고 값을 넣어줘야 함!
     }
 
     private void startMainActivity() {

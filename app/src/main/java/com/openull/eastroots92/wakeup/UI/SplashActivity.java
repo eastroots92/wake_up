@@ -47,10 +47,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private Boolean checkingUserData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
-        String userName = sharedPreferences.getString("name","");
+        // TODO: SharedPreference 값 가져와야 함!
 
-        if (userName == ""){
+
+        if ( true ){
             return true;
         }else{
             return false;

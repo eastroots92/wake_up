@@ -48,14 +48,9 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     private void initNotiAction() {
-        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        manager.cancel(CHANNEL_ID);
+        // TODO : 기존에 등록되어있던 Noti를 삭제한다. CHANNEL_ID
 
-        PowerManager pm=(PowerManager)getSystemService(POWER_SERVICE);
-        if(!pm.isScreenOn()){
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-        }
+        // TODO : PowerManager 를 통해 화면이 꺼져있어도 실행되게 한다.
     }
 
     private void ButtonClickListener() {
@@ -65,7 +60,6 @@ public class AlarmActivity extends AppCompatActivity {
     private void alarmButton() {
         binding.textViewAlarmOffButton.setOnClickListener(__->{
             alarmBell.stop();
-            finish();
         });
     }
 

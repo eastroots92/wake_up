@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
 
+//        TODO: 알람 매니저 만들기!
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         initDate();
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         ButtonClickListener();
     }
 
+    private void initDate() {
+        timePreference = getSharedPreferences("dateTime", MODE_PRIVATE);
+        simpleDate = new SimpleDateFormat("HH:mm");
+    }
 
     private void initView() {
         int hour = timePreference.getInt("hour", -1);
@@ -77,13 +82,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initAlarmActivity() {
-        alarmActivityIntent = new Intent("com.openull.eastroots92.ACTION_ALARM");
-        alarmActivityPendingIntent = PendingIntent.getActivity(MainActivity.this, REQUEST_CODE_3, alarmActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        TODO: alarmAcitivy를 띄우는 인텐트 만들기
+
     }
 
     private void initNotificationReceiver() {
-        notificationIntent = new Intent(MainActivity.this, NotificationReceiver.class);
-        notificationPendingIntent = PendingIntent.getBroadcast(MainActivity.this, REQUEST_CODE_2, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//      TODO: NotiReceiver를 받아오는 인텐트 만들기
+
     }
 
 
@@ -164,10 +169,6 @@ public class MainActivity extends AppCompatActivity {
         timeDialog.show();
     }
 
-    private void initDate() {
-        timePreference = getSharedPreferences("dateTime", MODE_PRIVATE);
-        simpleDate = new SimpleDateFormat("HH:mm");
-    }
 
 
     public int[] getTimeNow() {
@@ -179,16 +180,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAlarm() {
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis() - 60000, notificationPendingIntent);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmActivityPendingIntent);
+//        TODO: 알람 매니저에게 설정한 인텐트 전달해주기
+
     }
 
     private void cancelAlarm(){
-        alarmManager.cancel(notificationPendingIntent);
-        notificationPendingIntent.cancel();
+//       TODO: 알람매니저에게 다 취소하라고 말해주기!
 
-        alarmManager.cancel(alarmActivityPendingIntent);
-        alarmActivityPendingIntent.cancel();
     }
 
 }
