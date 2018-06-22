@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Boolean isDatePicked;
 
-    private static final int REQUEST_CODE_2 = 10;
-    private static final int REQUEST_CODE_3 = 20;
+    public static final int REQUEST_CODE_2 = 10;
+    public static final int REQUEST_CODE_3 = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
