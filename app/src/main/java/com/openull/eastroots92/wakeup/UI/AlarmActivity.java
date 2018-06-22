@@ -65,15 +65,9 @@ public class AlarmActivity extends AppCompatActivity {
     private void alarmButton() {
         binding.textViewAlarmOffButton.setOnClickListener(__->{
             alarmBell.stop();
-            testCode();
+            finish();
         });
     }
-
-    private void testCode() {
-        Intent intent = new Intent(this, NotificationReceiver.class);
-        sendBroadcast(intent);
-    }
-
 
     private void initAlarm() {
         Uri alarm = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
