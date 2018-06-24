@@ -12,6 +12,9 @@ import com.openull.eastroots92.wakeup.UI.AlarmActivity;
 import com.openull.eastroots92.wakeup.UI.IntroActivity;
 import com.openull.eastroots92.wakeup.databinding.ActivitySplashBinding;
 
+import static com.openull.eastroots92.wakeup.UI.IntroActivity.NAME;
+import static com.openull.eastroots92.wakeup.UI.IntroActivity.USER_DATA;
+
 public class SplashActivity extends AppCompatActivity {
 
     private ActivitySplashBinding binding;
@@ -47,10 +50,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private Boolean checkingUserData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
-        String userName = sharedPreferences.getString("name","");
+        SharedPreferences sharedPreferences = getSharedPreferences(USER_DATA, MODE_PRIVATE);
+        String userName = sharedPreferences.getString(NAME,"");
 
-        if (userName == ""){
+        if ("".equals(userName)){
             return true;
         }else{
             return false;
