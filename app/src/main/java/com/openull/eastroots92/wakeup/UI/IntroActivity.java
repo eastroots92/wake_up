@@ -22,6 +22,9 @@ public class IntroActivity extends AppCompatActivity {
 
     private Handler handler = new Handler();
 
+    public final static String USER_DATA = "userData";
+    public final static String NAME = "name";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,10 +106,10 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     public void setUserData(String userName) {
-        SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(USER_DATA, Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name",userName);
+        editor.putString(NAME,userName);
         editor.commit();
     }
 

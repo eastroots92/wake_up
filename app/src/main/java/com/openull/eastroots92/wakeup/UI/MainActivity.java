@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_2 = 10;
     public static final int REQUEST_CODE_3 = 20;
 
+    public static final String HOUR = "hour";
+    public static final String MINUTE = "minute";
+    public static final String IS_MORNING_CALL = "isMorningCall";
+    public static final String DATE_TIME = "dateTime";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initView() {
-        int hour = timePreference.getInt("hour", -1);
-        int minute = timePreference.getInt("minute", -1);
+        int hour = timePreference.getInt(HOUR, -1);
+        int minute = timePreference.getInt(MINUTE, -1);
 
         if( hour > -1 && minute > -1 ){
             calendar = Calendar.getInstance();
@@ -88,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initTimeSwitch() {
-        boolean isMorningCall = timePreference.getBoolean("isMorningCall", false);
+        boolean isMorningCall = timePreference.getBoolean(IS_MORNING_CALL, false);
 
         if(isMorningCall){
             binding.switchTime.setChecked(true);
@@ -104,13 +109,13 @@ public class MainActivity extends AppCompatActivity {
         binding.switchTime.setOnCheckedChangeListener( (buttonView, isChecked) -> {
 
             SharedPreferences.Editor editor = timePreference.edit();
-            editor.putBoolean("isMorningCall",isChecked);
+            editor.putBoolean(IS_MORNING_CALL,isChecked);
             editor.commit();
 
             if(isChecked){
                 if(!isDatePicked){
-                    int hour = timePreference.getInt("hour", -1);
-                    int minute = timePreference.getInt("minute", -1);
+                    int hour = timePreference.getInt(HOUR, -1);
+                    int minute = timePreference.getInt(MINUTE, -1);
 
                     if( hour > -1 && minute > -1 ) {
                         calendar = Calendar.getInstance();
@@ -145,9 +150,9 @@ public class MainActivity extends AppCompatActivity {
 
             // sharedpreferences에 값 추가
             SharedPreferences.Editor editor = timePreference.edit();
-            editor.putInt("hour", hourOfDay);
-            editor.putInt("minute",minute);
-            editor.putBoolean("isMorningCall", true);
+            editor.putInt(HOUR, hourOfDay);
+            editor.putInt(MINUTE,minute);
+            editor.putBoolean(IS_MORNING_CALL, true);
             editor.commit();
 
 
@@ -165,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initDate() {
-        timePreference = getSharedPreferences("dateTime", MODE_PRIVATE);
+        timePreference = getSharedPreferences(DATE_TIME, MODE_PRIVATE);
         simpleDate = new SimpleDateFormat("HH:mm");
     }
 
